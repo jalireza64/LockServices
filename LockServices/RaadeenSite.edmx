@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RaadeenSiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="CST_CODE" />
+          </Key>
+          <Property Name="CST_CODE" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="USER_ID" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="CST_KIND" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ACTIVE_FLAG" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="CELL_PHONE" Type="nchar" MaxLength="15" />
+          <Property Name="ADDRESS" Type="nvarchar" MaxLength="255" />
+          <Property Name="TEL_NO_1" Type="nchar" MaxLength="15" />
+          <Property Name="E_MAIL" Type="nvarchar" MaxLength="100" />
+          <Property Name="RESP_NAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="UPDATE_DATE" Type="datetime" />
+          <Property Name="DESC1" Type="nvarchar" MaxLength="255" />
+          <Property Name="WEBSITE" Type="nvarchar" MaxLength="50" />
+          <Property Name="LOGO" Type="nvarchar" MaxLength="255" />
+          <Property Name="LOGO_FLAG" Type="nchar" MaxLength="1" />
+          <Property Name="preorder" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="PROD_CUST">
+          <Key>
+            <PropertyRef Name="CONTRACT_ID" />
+          </Key>
+          <Property Name="CONTRACT_ID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CST_CODE" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CONTRACT_CODE" Type="nvarchar" MaxLength="100" />
+          <Property Name="UPDATE_DATE" Type="datetime" />
+          <Property Name="VERSION" Type="numeric" Precision="5" Scale="0" />
+          <Property Name="PRD_ID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DEVICE_ID" Type="nvarchar(max)" />
+          <Property Name="VALID_DATE" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="PRODUCTS">
+          <Key>
+            <PropertyRef Name="PRD_ID" />
+          </Key>
+          <Property Name="PRD_ID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="USER_ID" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="SOFT_CODE" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SOFT_NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UPDATE_DATE" Type="datetime" />
+          <Property Name="PRD_PATH" Type="nvarchar" MaxLength="2000" />
+          <Property Name="PRD_NOTE" Type="ntext" />
+          <Property Name="FACILITIES" Type="ntext" />
+        </EntityType>
+        <Association Name="FK_PROD_CUS_R_1213_CUSTOMER">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="PROD_CUST" Type="Self.PROD_CUST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="CST_CODE" />
+            </Principal>
+            <Dependent Role="PROD_CUST">
+              <PropertyRef Name="CST_CODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROD_CUST_PRODUCTS">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="1" />
+          <End Role="PROD_CUST" Type="Self.PROD_CUST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRD_ID" />
+            </Principal>
+            <Dependent Role="PROD_CUST">
+              <PropertyRef Name="PRD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RaadeenSiteModelStoreContainer">
+          <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROD_CUST" EntityType="Self.PROD_CUST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCTS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_PROD_CUS_R_1213_CUSTOMER" Association="Self.FK_PROD_CUS_R_1213_CUSTOMER">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="PROD_CUST" EntitySet="PROD_CUST" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROD_CUST_PRODUCTS" Association="Self.FK_PROD_CUST_PRODUCTS">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="PROD_CUST" EntitySet="PROD_CUST" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RaadeenSiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="CST_CODE" />
+          </Key>
+          <Property Name="CST_CODE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="USER_ID" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CST_KIND" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ACTIVE_FLAG" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CELL_PHONE" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="ADDRESS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TEL_NO_1" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="E_MAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RESP_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UPDATE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="DESC1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="WEBSITE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LOGO" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LOGO_FLAG" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="preorder" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="PROD_CUST" Relationship="Self.FK_PROD_CUS_R_1213_CUSTOMER" FromRole="CUSTOMER" ToRole="PROD_CUST" />
+        </EntityType>
+        <EntityType Name="PROD_CUST">
+          <Key>
+            <PropertyRef Name="CONTRACT_ID" />
+          </Key>
+          <Property Name="CONTRACT_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CST_CODE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CONTRACT_CODE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UPDATE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="VERSION" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="PRD_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DEVICE_ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_PROD_CUS_R_1213_CUSTOMER" FromRole="PROD_CUST" ToRole="CUSTOMER" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_PROD_CUST_PRODUCTS" FromRole="PROD_CUST" ToRole="PRODUCTS" />
+          <Property Name="VALID_DATE" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PRODUCT">
+          <Key>
+            <PropertyRef Name="PRD_ID" />
+          </Key>
+          <Property Name="PRD_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="USER_ID" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SOFT_CODE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SOFT_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UPDATE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="PRD_PATH" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="PRD_NOTE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FACILITIES" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PROD_CUST" Relationship="Self.FK_PROD_CUST_PRODUCTS" FromRole="PRODUCTS" ToRole="PROD_CUST" />
+        </EntityType>
+        <Association Name="FK_PROD_CUS_R_1213_CUSTOMER">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="PROD_CUST" Type="Self.PROD_CUST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="CST_CODE" />
+            </Principal>
+            <Dependent Role="PROD_CUST">
+              <PropertyRef Name="CST_CODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROD_CUST_PRODUCTS">
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="PROD_CUST" Type="Self.PROD_CUST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="PRD_ID" />
+            </Principal>
+            <Dependent Role="PROD_CUST">
+              <PropertyRef Name="PRD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RaadeenSiteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CUSTOMERs" EntityType="Self.CUSTOMER" />
+          <EntitySet Name="PROD_CUST" EntityType="Self.PROD_CUST" />
+          <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCT" />
+          <AssociationSet Name="FK_PROD_CUS_R_1213_CUSTOMER" Association="Self.FK_PROD_CUS_R_1213_CUSTOMER">
+            <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
+            <End Role="PROD_CUST" EntitySet="PROD_CUST" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROD_CUST_PRODUCTS" Association="Self.FK_PROD_CUST_PRODUCTS">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="PROD_CUST" EntitySet="PROD_CUST" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RaadeenSiteModelStoreContainer" CdmEntityContainer="RaadeenSiteEntities">
+          <EntitySetMapping Name="CUSTOMERs">
+            <EntityTypeMapping TypeName="RaadeenSiteModel.CUSTOMER">
+              <MappingFragment StoreEntitySet="CUSTOMER">
+                <ScalarProperty Name="CST_CODE" ColumnName="CST_CODE" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="CST_KIND" ColumnName="CST_KIND" />
+                <ScalarProperty Name="ACTIVE_FLAG" ColumnName="ACTIVE_FLAG" />
+                <ScalarProperty Name="CELL_PHONE" ColumnName="CELL_PHONE" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="TEL_NO_1" ColumnName="TEL_NO_1" />
+                <ScalarProperty Name="E_MAIL" ColumnName="E_MAIL" />
+                <ScalarProperty Name="RESP_NAME" ColumnName="RESP_NAME" />
+                <ScalarProperty Name="UPDATE_DATE" ColumnName="UPDATE_DATE" />
+                <ScalarProperty Name="DESC1" ColumnName="DESC1" />
+                <ScalarProperty Name="WEBSITE" ColumnName="WEBSITE" />
+                <ScalarProperty Name="LOGO" ColumnName="LOGO" />
+                <ScalarProperty Name="LOGO_FLAG" ColumnName="LOGO_FLAG" />
+                <ScalarProperty Name="preorder" ColumnName="preorder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROD_CUST">
+            <EntityTypeMapping TypeName="RaadeenSiteModel.PROD_CUST">
+              <MappingFragment StoreEntitySet="PROD_CUST">
+                <ScalarProperty Name="VALID_DATE" ColumnName="VALID_DATE" />
+                <ScalarProperty Name="CONTRACT_ID" ColumnName="CONTRACT_ID" />
+                <ScalarProperty Name="CST_CODE" ColumnName="CST_CODE" />
+                <ScalarProperty Name="CONTRACT_CODE" ColumnName="CONTRACT_CODE" />
+                <ScalarProperty Name="UPDATE_DATE" ColumnName="UPDATE_DATE" />
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+                <ScalarProperty Name="PRD_ID" ColumnName="PRD_ID" />
+                <ScalarProperty Name="DEVICE_ID" ColumnName="DEVICE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTS">
+            <EntityTypeMapping TypeName="RaadeenSiteModel.PRODUCT">
+              <MappingFragment StoreEntitySet="PRODUCTS">
+                <ScalarProperty Name="PRD_ID" ColumnName="PRD_ID" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="SOFT_CODE" ColumnName="SOFT_CODE" />
+                <ScalarProperty Name="SOFT_NAME" ColumnName="SOFT_NAME" />
+                <ScalarProperty Name="UPDATE_DATE" ColumnName="UPDATE_DATE" />
+                <ScalarProperty Name="PRD_PATH" ColumnName="PRD_PATH" />
+                <ScalarProperty Name="PRD_NOTE" ColumnName="PRD_NOTE" />
+                <ScalarProperty Name="FACILITIES" ColumnName="FACILITIES" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

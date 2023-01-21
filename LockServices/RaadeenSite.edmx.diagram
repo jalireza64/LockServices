@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="882bf14294df4f03a4509f5c2f409627" Name="Diagram1" ZoomLevel="79">
+        <EntityTypeShape EntityType="RaadeenSiteModel.CUSTOMER" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="RaadeenSiteModel.PROD_CUST" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RaadeenSiteModel.PRODUCT" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="RaadeenSiteModel.FK_PROD_CUS_R_1213_CUSTOMER" ManuallyRouted="false" />
+        <AssociationConnector Association="RaadeenSiteModel.FK_PROD_CUST_PRODUCTS" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
